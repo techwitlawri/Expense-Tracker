@@ -3,28 +3,16 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required
 from flask_bcrypt import Bcrypt
-
-# Import the shared db and login_manager from your app package
-from . import db, login_manager
 from .models import User
+from .extensions import db, login_manager
 
-# Create the Blueprint for auth routes
-auth_bp = Blueprint(
-    'auth',             # this blueprint’s name
-    __name__,           # module where it lives
-    template_folder='../templates'
-)
-
-# Initialize Bcrypt (for hashing passwords)
+# Blueprint setup
+auth_bp = Blueprint('auth', __name__, template_folder='../templates')
 bcrypt = Bcrypt()
 
-# Tell Flask-Login how to load a user from the session
+# Tell Flask-Login how to reload a user from the session
 @login_manager.user_loader
 def load_user(user_id):
-    """
-    Given *user_id*, return the corresponding User object.
-    Flask-Login will use this to reload the user from the session.
-    """
     return User.query.get(int(user_id))
 
 
@@ -32,27 +20,33 @@ def load_user(user_id):
 def register():
     """
     GET:  Show the registration form.
-    POST: Validate form data, create a new User with a hashed password, and redirect to login.
+    POST: Validate and create a new user, then redirect to login.
     """
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form.get('username')
+        password = request.form.get('password')
 
-        # Check if username is already taken
-        if User.query.filter_by(username=username).first():
-            flash('Username is already taken', 'danger')
+        # Basic validation
+        if not username or not password:
+            flash('Username and password are required.', 'error')
             return redirect(url_for('auth.register'))
 
-        # Hash the password and create the user
-        pwd_hash = bcrypt.generate_password_hash(password).decode('utf-8')
-        new_user = User(username=username, password=pwd_hash)
+        # Check if username already exists
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
+            flash('Username already taken. Please choose another.', 'error')
+            return redirect(url_for('auth.register'))
+
+        # Hash the password and save the new user
+        hashed_pwd = bcrypt.generate_password_hash(password).decode('utf-8')
+        new_user = User(username=username, password=hashed_pwd)
         db.session.add(new_user)
         db.session.commit()
 
         flash('Registration successful! Please log in.', 'success')
         return redirect(url_for('auth.login'))
 
-    # GET request just renders the form
+    # If GET, just render the registration form
     return render_template('register.html')
 
 
@@ -60,21 +54,25 @@ def register():
 def login():
     """
     GET:  Show the login form.
-    POST: Verify credentials, log the user in, and redirect to dashboard.
+    POST: Authenticate and log the user in.
     """
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        # Find the user
         user = User.query.filter_by(username=username).first()
 
         # Check credentials
         if user and bcrypt.check_password_hash(user.password, password):
             login_user(user)
-            return redirect(url_for('expenses.dashboard'))
+            flash('Logged in successfully!', 'success')
+            return redirect(url_for('main.index'))
+        else:
+            flash('Invalid username or password.', 'error')
+            return redirect(url_for('auth.login'))
 
-        flash('Invalid username or password', 'danger')
-        return redirect(url_for('auth.login'))
-
+    # If GET, just render the login form
     return render_template('login.html')
 
 
@@ -82,7 +80,7 @@ def login():
 @login_required
 def logout():
     """
-    Log the current user out and redirect to the login page.
+    Log the user out and redirect to login page.
     """
     logout_user()
     flash('You have been logged out.', 'info')

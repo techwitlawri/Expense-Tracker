@@ -1,0 +1,16 @@
+<!-- templates/dashboard.html -->
+<h1>Your Expenses</h1>
+
+<a href="{{ url_for('expenses.add_expense') }}">➕ Add New Expense</a>
+
+<ul>
+  {% for exp in expenses %}
+    <li>
+      {{ exp.description }} — ${{ exp.amount }} 
+      <a href="{{ url_for('expenses.edit_expense', expense_id=exp.id) }}">✏️</a>
+      <a href="{{ url_for('expenses.delete_expense', expense_id=exp.id) }}">🗑️</a>
+    </li>
+  {% else %}
+    <li>You have no expenses yet.</li>
+  {% endfor %}
+</ul>
