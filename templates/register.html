@@ -1,30 +1,37 @@
 {% extends 'base.html' %}
 
-{% block title %}Register – Expense Tracker{% endblock %}
+{% block title %}Register - Expense Tracker{% endblock %}
 
 {% block content %}
   <h2>Register</h2>
-  <form method="POST" class="mt-3">
+  <form method="POST">
+    <div class="mb-3">
+      <label for="fullname" class="form-label">Full Name</label>
+      <input type="text" id="fullname" name="fullname" class="form-control" required>
+    </div>
     <div class="mb-3">
       <label for="username" class="form-label">Username</label>
-      <input 
-        type="text" 
-        id="username" 
-        name="username" 
-        class="form-control" 
-        required
-      >
+      <input type="text" id="username" name="username" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="country" class="form-label">Country</label>
+      <select id="country" name="country" class="form-select" required>
+        <option value="Nigeria">Nigeria</option>
+        <option value="United States">United States</option>
+        <option value="United Kingdom">United Kingdom</option>
+        <option value="Eurozone">Eurozone</option>
+        <!-- Add other countries here -->
+      </select>
     </div>
     <div class="mb-3">
       <label for="password" class="form-label">Password</label>
-      <input 
-        type="password" 
-        id="password" 
-        name="password" 
-        class="form-control" 
-        required
-      >
+      <input type="password" id="password" name="password" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="confirm_password" class="form-label">Confirm Password</label>
+      <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
     </div>
     <button type="submit" class="btn btn-primary">Register</button>
   </form>
+  <a href="{{ url_for('auth.login') }}" class="btn btn-link mt-3">Already have an account? Log in</a>
 {% endblock %}
