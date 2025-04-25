@@ -2,8 +2,9 @@
 
 # app/routes.py
 
-from flask import Blueprint, redirect, url_for
-from flask_login import current_user
+from flask import Blueprint,request, redirect, url_for, render_template,flash
+from flask_login import current_user, login_required
+from .extensions import db
 # app/routes.py
 
 from flask import Blueprint, redirect, url_for
@@ -26,3 +27,19 @@ def index():
 @main_bp.route('/hello')
 def hello():
     return "👋 Hello world!"
+
+@main_bp.route('/settings', methods=['GET', 'POST'])
+@login_required
+def settings():
+    # List of supported codes
+    currencies = ['USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'NGN']
+    if request.method == 'POST':
+        chosen = request.form.get('currency')
+        if chosen in currencies:
+            current_user.currency = chosen
+            db.session.commit()
+            flash('Currency updated!', 'success')
+        else:
+            flash('Invalid currency selection.', 'danger')
+        return redirect(url_for('main.settings'))
+    return render_template('settings.html', currencies=currencies)

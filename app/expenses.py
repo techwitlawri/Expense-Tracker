@@ -5,7 +5,7 @@ from flask_login import login_required, current_user
 from .extensions import db            # Import db from extensions
 from .models import Expense
 
-exp_bp = Blueprint('expenses', __name__, template_folder='../templates')
+exp_bp = Blueprint('expenses', __name__)
 
 @exp_bp.route('/dashboard')
 @login_required

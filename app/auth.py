@@ -7,7 +7,7 @@ from .models import User
 from .extensions import db, login_manager
 
 # Blueprint setup
-auth_bp = Blueprint('auth', __name__, template_folder='../templates')
+auth_bp = Blueprint('auth', __name__)
 bcrypt = Bcrypt()
 
 # Tell Flask-Login how to reload a user from the session

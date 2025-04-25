@@ -1,35 +1,30 @@
-<!-- templates/login.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <h2>Login</h2>
+{% extends 'base.html' %}
 
-    <!-- Display Flash Messages -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <ul>
-            {% for category, message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
+{% block title %}Login – Expense Tracker{% endblock %}
 
-    <form method="POST">
-        <label for="username">Username</label>
-        <input type="text" name="username" required>
-        <br><br>
-        <label for="password">Password</label>
-        <input type="password" name="password" required>
-        <br><br>
-        <button type="submit">Login</button>
-    </form>
-    <br>
-    <a href="{{ url_for('auth.register') }}">Don't have an account? Register here</a>
-</body>
-</html>
+{% block content %}
+  <h2>Login</h2>
+  <form method="POST" class="mt-3">
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input 
+        type="text" 
+        id="username" 
+        name="username" 
+        class="form-control" 
+        required
+      >
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input 
+        type="password" 
+        id="password" 
+        name="password" 
+        class="form-control" 
+        required
+      >
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+{% endblock %}

@@ -1,16 +1,39 @@
-<!-- templates/dashboard.html -->
-<h1>Your Expenses</h1>
+{% extends 'base.html' %}
 
-<a href="{{ url_for('expenses.add_expense') }}">➕ Add New Expense</a>
+{% block title %}Dashboard – Expense Tracker{% endblock %}
 
-<ul>
-  {% for exp in expenses %}
-    <li>
-      {{ exp.description }} — ${{ exp.amount }} 
-      <a href="{{ url_for('expenses.edit_expense', expense_id=exp.id) }}">✏️</a>
-      <a href="{{ url_for('expenses.delete_expense', expense_id=exp.id) }}">🗑️</a>
-    </li>
-  {% else %}
-    <li>You have no expenses yet.</li>
-  {% endfor %}
-</ul>
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Your Expenses</h2>
+    <a href="{{ url_for('expenses.add_expense') }}" class="btn btn-primary">➕ Add New Expense</a>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for exp in expenses %}
+      <tr>
+        <td>{{ exp.description }}</td>
+        <!-- <td>${{ '%.2f'|format(exp.amount) }}</td> -->
+        <td>{{ currency_symbol(current_user.currency) }}{{ '%.2f'|format(exp.amount) }}</td>
+        <td>{{ exp.date.strftime('%Y-%m-%d') }}</td>
+        <td>
+          <a href="{{ url_for('expenses.edit_expense', expense_id=exp.id) }}" class="btn btn-sm btn-outline-light">✏️</a>
+          <a href="{{ url_for('expenses.delete_expense', expense_id=exp.id) }}" class="btn btn-sm btn-outline-danger">🗑️</a>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="4">You have no expenses yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
