@@ -63,3 +63,9 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }

@@ -2,10 +2,13 @@
 
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
-from .extensions import db            # Import db from extensions
 from .models import Expense
+from .extensions import db            # Import db from extensions
+
+from datetime import datetime
 
 exp_bp = Blueprint('expenses', __name__)
+
 
 @exp_bp.route('/dashboard')
 @login_required
@@ -15,39 +18,39 @@ def dashboard():
     """
     # Query only this user's expenses
     user_expenses = Expense.query.filter_by(user_id=current_user.id).all()
-    return render_template('dashboard.html', expenses=user_expenses)
+    return render_template('dashboard.html', expenses=user_expenses, user=current_user)
 
-
-@exp_bp.route('/add', methods=['GET', 'POST'])
+@exp_bp.route('/add_expense', methods=['GET', 'POST'])
 @login_required
 def add_expense():
-    """
-    GET: Show the add-expense form.
-    POST: Validate & save the new expense, then redirect back.
-    """
     if request.method == 'POST':
         description = request.form.get('description')
-        amount      = request.form.get('amount')
+        amount = request.form.get('amount')
+        date = request.form.get('date')
 
-        # Basic validation
-        if not description or not amount:
+        # Form validation
+        if not all([description, amount, date]):
             flash('All fields are required.', 'error')
             return redirect(url_for('expenses.add_expense'))
 
-        # Save new expense
-        new_exp = Expense(
+        # Save to database
+        new_expense = Expense(
             description=description,
             amount=float(amount),
-            user_id=current_user.id
+            date=datetime.strptime(date, '%Y-%m-%d'),
+            user_id=current_user.id,
+            currency=current_user.currency  # Use the user's currency
         )
-        db.session.add(new_exp)
-        db.session.commit()
 
-        flash('Expense added!', 'success')
+        db.session.add(new_expense)
+        db.session.commit()
+        flash('Expense added successfully!', 'success')
         return redirect(url_for('expenses.dashboard'))
 
-    # If GET, just render the form
     return render_template('add_expense.html')
+
+
+
 
 @exp_bp.route('/edit/<int:expense_id>', methods=['GET', 'POST'])
 @login_required

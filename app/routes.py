@@ -5,6 +5,7 @@
 from flask import Blueprint,request, redirect, url_for, render_template,flash
 from flask_login import current_user, login_required
 from .extensions import db
+from .models import Expense
 # app/routes.py
 
 from flask import Blueprint, redirect, url_for
@@ -30,8 +31,13 @@ def hello():
 
 @main_bp.route('/settings', methods=['GET', 'POST'])
 @login_required
+def dashboard():
+    user = current_user  # Get the current logged-in user
+    expenses = Expense.query.filter_by(user_id=user.id).all()  # Fetch user's expenses
+    return render_template('dashboard.html', user=user, expenses=expenses)
+@main_bp.route('/settings', methods=['GET', 'POST'])
+@login_required
 def settings():
-    # List of supported codes
     currencies = ['USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'NGN']
     if request.method == 'POST':
         chosen = request.form.get('currency')
@@ -43,3 +49,4 @@ def settings():
             flash('Invalid currency selection.', 'danger')
         return redirect(url_for('main.settings'))
     return render_template('settings.html', currencies=currencies)
+

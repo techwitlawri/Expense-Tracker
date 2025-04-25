@@ -3,37 +3,33 @@
 {% block title %}Dashboard – Expense Tracker{% endblock %}
 
 {% block content %}
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>Your Expenses</h2>
-    <a href="{{ url_for('expenses.add_expense') }}" class="btn btn-primary">➕ Add New Expense</a>
-  </div>
-
-  <table class="table table-striped">
+  <h2>Welcome, {{ user.fullname }}</h2>
+  <h3>Your Expenses</h3>
+  <table class="table">
     <thead>
       <tr>
         <th>Description</th>
         <th>Amount</th>
         <th>Date</th>
-        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      {% for exp in expenses %}
-      <tr>
-        <td>{{ exp.description }}</td>
-        <!-- <td>${{ '%.2f'|format(exp.amount) }}</td> -->
-        <td>{{ currency_symbol(current_user.currency) }}{{ '%.2f'|format(exp.amount) }}</td>
-        <td>{{ exp.date.strftime('%Y-%m-%d') }}</td>
-        <td>
-          <a href="{{ url_for('expenses.edit_expense', expense_id=exp.id) }}" class="btn btn-sm btn-outline-light">✏️</a>
-          <a href="{{ url_for('expenses.delete_expense', expense_id=exp.id) }}" class="btn btn-sm btn-outline-danger">🗑️</a>
-        </td>
-      </tr>
-      {% else %}
-      <tr>
-        <td colspan="4">You have no expenses yet.</td>
-      </tr>
+      {% for expense in expenses %}
+        <tr>
+          <td>{{ expense.description }}</td>
+          <td>{{ expense.amount }} {{ user.currency }}</td>
+          <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
+          <td>
+            <a href="{{ url_for('expenses.edit_expense', expense_id=expense.id) }}" class="btn btn-sm btn-primary me-2">
+              ✏️ 
+            </a>
+            <a href="{{ url_for('expenses.delete_expense', expense_id=expense.id) }}" class="btn btn-sm btn-danger">
+              🗑️ 
+            </a>
+          </td>
+        </tr>
       {% endfor %}
     </tbody>
   </table>
+  <a href="{{ url_for('expenses.add_expense') }}" class="btn btn-primary">Add New Expense</a>
 {% endblock %}
