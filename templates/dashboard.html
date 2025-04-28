@@ -5,12 +5,14 @@
 {% block content %}
   <h2>Welcome, {{ user.fullname }}</h2>
   <h3>Your Expenses</h3>
+  
   <table class="table">
     <thead>
       <tr>
         <th>Description</th>
         <th>Amount</th>
         <th>Date</th>
+        ,<th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -32,4 +34,26 @@
     </tbody>
   </table>
   <a href="{{ url_for('expenses.add_expense') }}" class="btn btn-primary">Add New Expense</a>
+  <!-- Report Section -->
+  <hr class="my-5">
+
+  <h3>Spending Report</h3>
+
+  <!-- Total Expenses -->
+  <div class="mb-4">
+    <h5>Total Expenses: {{ total_expenses }} {{ user.currency }}</h5>
+  </div>
+
+  <!-- Category Breakdown -->
+  <div class="mb-4">
+    <h5>Expenses by Category</h5>
+    <ul class="list-group">
+      {% for category, percentage in category_percentages.items() %}
+        <li class="list-group-item d-flex justify-content-between">
+          {{ category }}: {{ percentage|round(2) }}%
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
 {% endblock %}

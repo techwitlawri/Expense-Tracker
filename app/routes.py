@@ -43,3 +43,6 @@ def settings():
         return redirect(url_for('expenses.dashboard'))
     return render_template('settings.html', currencies=currencies)
 
+
+
+

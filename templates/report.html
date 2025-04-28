@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Expense Report – Expense Tracker{% endblock %}
+
+{% block content %}
+  <h2>Expense Report</h2>
+  
+  <div>
+    <img src="data:image/png;base64,{{ chart_data }}" alt="Spending Report Chart">
+  </div>
+
+  <a href="{{ url_for('expenses.dashboard') }}" class="btn btn-primary mt-4">Back to Dashboard</a>
+{% endblock %}
