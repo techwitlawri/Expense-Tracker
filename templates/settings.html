@@ -3,13 +3,13 @@
 {% block content %}
 <div class="container">
     <h2>Settings</h2>
-
+    <p><strong>Current Currency:</strong> {{ current_currency }}</p>
     <form method="POST">
         <div class="form-group">
             <label for="currency">Select Currency</label>
-            <select name="currency" class="form-control">
-                {% for code in currencies %}
-                    <option value="{{ code }}" {% if current_user.currency == code %}selected{% endif %}>{{ code }}</option>
+            <select name="currency" id = "currency" required>
+                {% for currency in currencies %}
+                    <option value="{{ currency }}" {% if currency == current_currency %}selected{% endif %}>{{currency}}</option>
                 {% endfor %}
             </select>
         </div>

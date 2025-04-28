@@ -26,16 +26,12 @@ def index():
 def hello():
     return "👋 Hello world!"
 
-# @main_bp.route('/settings', methods=['GET', 'POST'])
-# @login_required
-# def setting():
-#     user = current_user  # Get the current logged-in user
-#     expenses = Expense.query.filter_by(user_id=user.id).all()  # Fetch user's expenses
-#     return render_template('dashboard.html', user=user, expenses=expenses)
+
 @main_bp.route('/settings', methods=['GET', 'POST'])
 @login_required
 def settings():
     currencies = ['USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'NGN']
+    current_currency = current_user.currency
     if request.method == 'POST':
         chosen = request.form.get('currency')
         if chosen in currencies:
@@ -44,6 +40,6 @@ def settings():
             flash('Currency updated!', 'success')
         else:
             flash('Invalid currency selection.', 'danger')
-        return redirect(url_for('main.settings'))
+        return redirect(url_for('expenses.dashboard'))
     return render_template('settings.html', currencies=currencies)
 
