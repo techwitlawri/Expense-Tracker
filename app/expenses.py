@@ -2,7 +2,7 @@
 
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
-from .models import Expense
+from .models import Expense,db
 from .extensions import db            # Import db from extensions
 
 from datetime import datetime
@@ -27,9 +27,21 @@ def add_expense():
         description = request.form.get('description')
         amount = request.form.get('amount')
         date = request.form.get('date')
+        category = request.form.get('category')
+        custom_category = request.form.get('custom_ccategory')
+        
+        if not category and not custom_category:
+            flash('Please select a category or enter a custom category.')
+            return render_template('add_expense.html')
+        
+        # if the user entered a custom category
+        if custom_category:
+            final_category = custom_category.strip()
+        else: 
+            final_category = category
 
         # Form validation
-        if not all([description, amount, date]):
+        if not all([description, amount, date, category]):
             flash('All fields are required.', 'error')
             return redirect(url_for('expenses.add_expense'))
 
@@ -39,7 +51,7 @@ def add_expense():
             amount=float(amount),
             date=datetime.strptime(date, '%Y-%m-%d'),
             user_id=current_user.id,
-            currency=current_user.currency  # Use the user's currency
+            # currency=current_user.currency  # Use the user's currency
         )
 
         db.session.add(new_expense)

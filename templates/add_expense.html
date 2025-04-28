@@ -17,6 +17,25 @@
       <label for="date" class="form-label">Date</label>
       <input type="date" id="date" name="date" class="form-control" required>
     </div>
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select id="category" name="category" class="form-select">
+          <option value="">Select a category</option>
+          <option value="Food">Food</option>
+          <option value="Transport">Transportation</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Bills">Bills</option>
+          <option value="Utilities">Utilities</option>
+          <option value="Health">Health</option>
+          <option value="Education">Education</option>
+          <option value="Other">Other</option>  
+          <label for="custom_category">Custom Category (optional):</label>
+          <input type="text" id="custom_category" name="custom_category" 
+                 placeholder="Enter custom category">
+           
+      </select>
+     
+  </div>
     <button type="submit" class="btn btn-primary">Add Expense</button>
   </form>
 {% endblock %}

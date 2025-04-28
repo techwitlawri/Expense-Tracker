@@ -24,6 +24,9 @@ class Expense(db.Model):
     amount      = db.Column(db.Float, nullable=False)
     date        = db.Column(db.DateTime, default=datetime.utcnow)
     user_id     = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    currency    = db.Column(db.String(3), nullable=False, default='USD')
+    category = db.Column(db.String(50), nullable= True)
+
+    user = db.relationship('User',backref= 'expenses')
+
     def __repr__(self):
-        return f"<Expense {self.description} - ${self.amount}>"
+        return f"<Expense {self.description}>"
