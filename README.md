@@ -1,8 +1,7 @@
 # 📊 Expense Tracker
-Welcome to my **Expense Tracker**, a web app that helps users track and manage their daily spending.  
+Welcome to my **Expense Tracker**, a web app that helps users track and manage their daily spending, 
+with user authentication, category-based expense tracking, and visual spending reports.  
 This is part of my journey as an aspiring backend developer. 
-
-It is a full-featured Flask web application for managing personal expenses, with user authentication, category-based expense tracking, and visual spending reports.
 
 **Live demo**: https://expense-tracker-kvgt.onrender.com
 
@@ -94,10 +93,11 @@ ___________________________________________________________________________
   2. **Create a virtual environment & activate it**
 
 python -m venv venv
-venv\Scripts\activate 
+
+.\venv\Scripts\activate 
 _____________________________________________________________________________
   3. **Install dependencies:**
-  4. 
+
 pip install -r requirements.txt
 _____________________________________________________________________________
   4. **Run locally (using SQLite):**
@@ -129,6 +129,7 @@ ____________________________________________________________________________
 **Contact**
 
 Feel free to reach out via LinkedIn or GitHub if you have feedback or want to collaborate.
+
 Linkedin -  www.linkedin.com/in/mmachi-ezeh-3a77a21b2
 _____________________________________________________________________________________
  **Contributing**
