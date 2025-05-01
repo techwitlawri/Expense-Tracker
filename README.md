@@ -1,34 +1,49 @@
 # 📊 Expense Tracker
-A full-featured Flask web application for managing personal expenses, with user authentication, category-based expense tracking, and visual spending reports.
+Welcome to my **Expense Tracker**, a web app that helps users track and manage their daily spending.  
+This is part of my journey as an aspiring backend developer. 
 
-Live demo: https://expense-tracker-kvgt.onrender.com
+It is a full-featured Flask web application for managing personal expenses, with user authentication, category-based expense tracking, and visual spending reports.
+
+**Live demo**: https://expense-tracker-kvgt.onrender.com
+
+**GitHub Repo**: [Expense Tracker] https://github.com/techwitlawri/Expense-Tracker
 ___________________________________________________________________
+## 💡 Project Overview
+
+This project allows users to:
+- Sign up and log in
+- Add, update, and delete expenses
+- Assign categories to spending
+- View timestamps for each entry
+
+It was built using **Python (Flask)** with **SQLAlchemy** for database management, and deployed via **Render**.
+__________________________________________________________________________________________________
  ## Features
  
-🔐 User Registration & Login
+- User Registration & Login
 
-💸 Add, Edit, Delete Expenses
+- Add, Edit, Delete Expenses
 
-🗂️ Track Spending by Category
+- Track Spending by Category
 
-📊 Reports with Chart Visualizations
+- Reports with Chart Visualizations
 
-🌍 Currency Selection Based on Country
+- Currency Selection Based on Country
 
-🧼 Clean and Responsive UI
+- Clean and Responsive UI
 
 ____________________________________________________________________
  ## Tech Stack
  
-. Backend: Python, Flask, SQLAlchemy
+ **Backend**: Python, Flask, SQLAlchemy
 
-. Database: PostgreSQL (Render Free Tier)
+**Database**: PostgreSQL (Render Free Tier)
 
-. Frontend: HTML, CSS (Bootstrap), Jinja2 Templates
+**Frontend**: HTML, CSS (Bootstrap), Jinja2 Templates
 
-. Authentication: Flask-Login
+**Authentication**: Flask-Login
 
-. Deployment: Render
+**Deployment**: Render
 ________________________________________________________________________
 ## Project Structure
 
@@ -68,19 +83,24 @@ expense-tracker/
 └── .env
 _________________________________________________________________________
 ## Installation (For Local Development)
-Clone the repo
+  1. **Clone the repo**
 
-git clone """https://github.com/techwitlawri/Expense-Tracker.git"""
+  '''bash
+
+git clone https://github.com/techwitlawri/Expense-Tracker.git
+
+cd Expense-Tracker
 ___________________________________________________________________________
-## Create a virtual environment & activate it
+  2. **Create a virtual environment & activate it**
 
 python -m venv venv
 venv\Scripts\activate 
 _____________________________________________________________________________
-##  Install dependencies:
+  3. **Install dependencies:**
+  4. 
 pip install -r requirements.txt
 _____________________________________________________________________________
-## Run locally (using SQLite):
+  4. **Run locally (using SQLite):**
 
  run.py
  ___________________________________________________________________________________
@@ -99,17 +119,23 @@ Report page
 _________![report](https://github.com/user-attachments/assets/d9a20f06-0954-49be-98c7-ae52900ccd32)
 ______________________________________________________________________
 
- ## Contributing
- 
-Contributions are welcome! Feel free to fork the repo and submit a pull request.
-_________________________________________________________________________________
-## Contact
+### About Me
+
+
+Hi! I’m Mmachi, an aspiring backend developer based in the UK, 
+passionate about building real-world projects with Python.
+I’m continuously learning and open to opportunities or feedback.
+____________________________________________________________________________
+**Contact**
 
 Feel free to reach out via LinkedIn or GitHub if you have feedback or want to collaborate.
 Linkedin -  www.linkedin.com/in/mmachi-ezeh-3a77a21b2
-___________________________________________________________________________________________
-
-## License
+_____________________________________________________________________________________
+ **Contributing**
+ 
+Contributions are welcome! Feel free to fork the repo and submit a pull request.
+_________________________________________________________________________________
+**License**
 This project is licensed under the MIT License — see the LICENSE file for details.
 
 
