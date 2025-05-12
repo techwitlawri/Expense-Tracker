@@ -6,7 +6,7 @@ This is part of my journey as an aspiring backend developer.
 **Live demo**: https://expense-tracker-kvgt.onrender.com
 
 **GitHub Repo**: [Expense Tracker] https://github.com/techwitlawri/Expense-Tracker
-___________________________________________________________________
+____________________________________________________________________________________
 ## 💡 Project Overview
 
 This project allows users to:
@@ -16,7 +16,7 @@ This project allows users to:
 - View timestamps for each entry
 
 It was built using **Python (Flask)** with **SQLAlchemy** for database management, and deployed via **Render**.
-__________________________________________________________________________________________________
+
  ## Features
  
 - User Registration & Login
@@ -31,7 +31,7 @@ ________________________________________________________________________________
 
 - Clean and Responsive UI
 
-____________________________________________________________________
+
  ## Tech Stack
  
  **Backend**: Python, Flask, SQLAlchemy
