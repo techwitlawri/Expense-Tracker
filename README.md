@@ -118,7 +118,23 @@ Report page
 
 _________![report](https://github.com/user-attachments/assets/d9a20f06-0954-49be-98c7-ae52900ccd32)
 ______________________________________________________________________
+### Testing
+To run the tests for the project, you can use pytest. 
+If you don’t have pytest installed, you can install it using:
 
+
+pip install pytest
+______________________________________________________________
+
+to run the test:
+
+pytest
+
+### Test Configuration
+
+
+The tests are configured to use an in-memory SQLite database for quick setup and teardown during tests.
+_________________________________________________________________________
 ### About Me
 
 
