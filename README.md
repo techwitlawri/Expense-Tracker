@@ -43,71 +43,56 @@ It was built using **Python (Flask)** with **SQLAlchemy** for database managemen
 **Authentication**: Flask-Login
 
 **Deployment**: Render
-________________________________________________________________________
-## Project Structure
 
-expense-tracker/
-
-│
-
-├── app/
-
-│ 
-├── __init__.py
-
-│ ├── models.py
-
-│ ├── routes.py
-
-│  ├── expenses.py                           
-
-
-│ ├── auth.py                                 
-
-
-│ └── templates/
-
-│
-
-├── static/
-
-│
-
-├── run.py
-
-├── config.py
-
-├── requirements.txt
-
-└── .env
-_________________________________________________________________________
 ## Installation (For Local Development)
+
   1. **Clone the repo**
 
-  '''bash
+  ```bash
 
-git clone https://github.com/techwitlawri/Expense-Tracker.git
+  git clone https://github.com/techwitlawri/Expense-Tracker.git
 
-cd Expense-Tracker
-___________________________________________________________________________
-  2. **Create a virtual environment & activate it**
-
+  cd Expense-Tracker
+```
+2. **Create a virtual environment & activate it**
+  ```bash
 python -m venv venv
 
 .\venv\Scripts\activate 
-_____________________________________________________________________________
-  3. **Install dependencies:**
-
+```
+ 3. **Install dependencies:**
+```
 pip install -r requirements.txt
-_____________________________________________________________________________
+```
   4. **Run locally (using SQLite):**
-
+```
  run.py
- ___________________________________________________________________________________
+```
+## Project Structure
+```bash
+expense-tracker/
+
+│
+├── app/
+│ 
+├── __init__.py
+│ ├── models.py
+│ ├── routes.py
+│ ├── expenses.py                        
+│ ├── auth.py                                 
+│ └── templates/
+│
+├── static/
+│
+├── run.py
+├── config.py
+├── requirements.txt
+└── .env
+```
  login page.
  ![login](https://github.com/user-attachments/assets/a595b662-6591-43d9-8fc9-f2eb3e0eb63f)
 
- __________________________________________________________________________________________
+ 
  dashboard page
  
 ![dashboard](https://github.com/user-attachments/assets/db1e7b41-9593-4967-b471-4ec384b619de)
